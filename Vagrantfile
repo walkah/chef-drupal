@@ -3,7 +3,7 @@ Vagrant::Config.run do |config|
   config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
 
   config.vm.network "33.33.33.10"
-  config.vm.share_folder "v-root", "/vagrant", "."
+  config.vm.share_folder "v-root", "/vagrant", ".", :nfs => true
   config.vm.forward_port "mysql", 3306, 3306
   config.vm.customize do |vm|
     vm.memory_size = 1024
