@@ -15,7 +15,10 @@ Vagrant::Config.run do |config|
   
     # You may also specify custom JSON attributes:
     chef.json.merge!({
-                       :mysql => {:server_root_password => "walkah" },
+                       :mysql => {
+                         :server_root_password => "walkah",
+                         :bind_address => "0.0.0.0"
+                       },
                        :hosts => ["d6.dev", "d7.dev"]
                      })
   end
