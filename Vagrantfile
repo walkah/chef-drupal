@@ -4,6 +4,7 @@ Vagrant::Config.run do |config|
 
   config.vm.network "33.33.33.10"
   config.vm.share_folder "v-root", "/vagrant", "."
+  config.vm.forward_port "mysql", 3306, 3306
   config.vm.customize do |vm|
     vm.memory_size = 1024
   end
