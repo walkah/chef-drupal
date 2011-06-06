@@ -6,6 +6,7 @@ require_recipe "php::package"
 require_recipe "php::module_gd"
 require_recipe "php::module_mysql"
 require_recipe "php::module_apc"
+require_recipe "php::module_curl"
 require_recipe "drush"
 
 node[:hosts].each do |site|
