@@ -1,15 +1,14 @@
 #
-# Cookbook Name:: apache2
-# Recipe:: php5 
-#
-# Copyright 2008-2009, Opscode, Inc.
+# Author:: Seth Chisamore (<schisamo@opscode.com>)
+# Copyright:: Copyright (c) 2011 Opscode, Inc.
+# License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#
+# 
 #     http://www.apache.org/licenses/LICENSE-2.0
-#
+# 
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,21 +16,18 @@
 # limitations under the License.
 #
 
-case node[:platform]
-when "debian", "ubuntu"
-  package "libapache2-mod-php5" do
-    action :install
-  end  
-when "arch"
-  package "php-apache" do
-    action :install
-    notifies :run, resources(:execute => "generate-module-list"), :immediately
-  end
-when "centos", "redhat", "fedora"
-  package "php53" do
-    action :install
-    notifies :run, resources(:execute => "generate-module-list"), :immediately
+module Opscode
+  module Mysql
+    module Helpers
+
+      def debian_before_squeeze?
+        platform?("debian") && (node.platform_version.to_f < 6.0)
+      end
+
+      def ubuntu_before_lucid?
+        platform?("ubuntu") && (node.platform_version.to_f < 10.0)
+      end
+
+    end
   end
 end
-
-apache_module "php5"

@@ -18,14 +18,16 @@
 #
 
 default['mysql']['bind_address']              = ipaddress
-default['mysql']['datadir']                   = "/var/lib/mysql"
+default['mysql']['data_dir']                   = "/var/lib/mysql"
 
 case node["platform"]
 when "centos", "redhat", "fedora", "suse"
+  set['mysql']['conf_dir']                    = '/etc'
   set['mysql']['socket']                      = "/var/lib/mysql/mysql.sock"
   set['mysql']['pid_file']                    = "/var/run/mysqld/mysqld.pid"
   set['mysql']['old_passwords']               = 1
 else
+  set['mysql']['conf_dir']                    = '/etc/mysql'
   set['mysql']['socket']                      = "/var/run/mysqld/mysqld.sock"
   set['mysql']['pid_file']                    = "/var/run/mysqld/mysqld.pid"
   set['mysql']['old_passwords']               = 0
@@ -37,6 +39,7 @@ if attribute?('ec2')
   default['mysql']['ebs_vol_size'] = 50
 end
 
+default['mysql']['allow_remote_root']               = false
 default['mysql']['tunable']['back_log']             = "128"
 default['mysql']['tunable']['key_buffer']           = "256M"
 default['mysql']['tunable']['max_allowed_packet']   = "16M"
