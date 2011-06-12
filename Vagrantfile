@@ -17,6 +17,7 @@ Vagrant::Config.run do |config|
     chef.json.merge!({
                        :mysql => {
                          :server_root_password => "walkah",
+                         :allow_remote_root => true,
                          :bind_address => "0.0.0.0"
                        },
                        :hosts => ["d6.dev", "d7.dev"]
