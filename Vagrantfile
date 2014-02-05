@@ -1,26 +1,29 @@
-Vagrant::Config.run do |config|
-  config.vm.box = "lucid32"
-  config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
 
-  config.vm.network "33.33.33.10"
-  config.vm.share_folder "v-root", "/vagrant", ".", :nfs => true
-  config.vm.forward_port "mysql", 3306, 3306
-  config.vm.customize do |vm|
-    vm.memory_size = 1024
-  end
+Vagrant.configure("2") do |config|
+  config.vm.hostname = "drupal"
+
+  config.vm.box = "precise64"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+
+  config.vm.network :private_network, ip: "33.33.33.10"
+
+  config.omnibus.chef_version = :latest
+  config.berkshelf.enabled = true
+
 
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = "cookbooks"
-    chef.add_recipe "vagrant_main"
-  
-    # You may also specify custom JSON attributes:
-    chef.json.merge!({
-                       :mysql => {
-                         :server_root_password => "walkah",
-                         :allow_remote_root => true,
-                         :bind_address => "0.0.0.0"
-                       },
-                       :hosts => ["d6.dev", "d7.dev"]
-                     })
+    chef.json = {
+      :mysql => {
+        :server_root_password => 'root',
+        :server_debian_password => 'root',
+        :server_repl_password => 'root'
+      }
+    }
+
+    chef.run_list = [
+        "recipe[drupal::default]"
+    ]
   end
 end
