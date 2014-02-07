@@ -23,7 +23,8 @@ Vagrant.configure("2") do |config|
     }
 
     chef.run_list = [
-        "recipe[drupal::default]"
+      "recipe[apt]",
+      "recipe[drupal::default]"
     ]
   end
 end
