@@ -31,6 +31,10 @@ include_recipe 'apache2::mod_rewrite'
 include_recipe 'git'
 include_recipe 'drush'
 
+%w(curl htop php5-gmp unzip).each do |pkg|
+  package pkg
+end
+
 php_pear 'uploadprogress' do
   action :install
 end
