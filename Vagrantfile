@@ -12,13 +12,15 @@ Vagrant.configure("2") do |config|
   config.omnibus.chef_version = :latest
   config.berkshelf.enabled = true
 
+  config.ssh.forward_agent = true
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       :mysql => {
         :server_root_password => 'root',
         :server_debian_password => 'root',
-        :server_repl_password => 'root'
+        :server_repl_password => 'root',
+        :allow_remote_root => true
       }
     }
 
