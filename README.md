@@ -1,6 +1,6 @@
-# Drupal Cookbook
+# chef-drupal [![Build Status](https://travis-ci.org/walkah/chef-drupal.png?branch=master)](https://travis-ci.org/walkah/chef-drupal)
 
-This cookbook installs and configures Drupal. 
+This cookbook installs and configures Drupal.
 
 I use it primarily as a dependency on projects and for local (Vagrant) development.
 
