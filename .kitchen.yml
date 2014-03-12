@@ -7,12 +7,30 @@ provisioner:
 
 platforms:
   - name: ubuntu-12.04
+    driver_config:
+      customize:
+        memory: 2048
+        cpus: 2
+      network:
+        - ["private_network", {ip: "33.33.33.10"}]
     run_list:
       - recipe[apt]
-  - name: centos-6.4
+    attributes:
+      mysql:
+        server_root_password: 'root'
+        server_debian_password: 'root'
+        server_repl_password: 'root'
+        allow_remote_root: true
+        bind_address: '0.0.0.0'
+      apache:
+        listen_ports: ['8080']
+        default_site_enabled: false
+      nginx:
+        default_site_enabled: false
+      drupal:
+        docroot: '/vagrant/public'
 
 suites:
   - name: default
     run_list:
       - recipe[drupal::default]
-    attributes:

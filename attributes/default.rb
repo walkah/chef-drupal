@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: drupal
-# Recipe:: default
+# Attributes:: default
 #
 # Copyright (C) 2014 James Walker
 #
@@ -17,5 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe 'drupal::database'
-include_recipe 'drupal::webserver'
+default['drupal']['project_name'] = 'drupal'
+default['drupal']['docroot'] = '/var/www/drupal'
+default['drupal']['apache_port'] = 8080
+default['drupal']['database'] = 'drupal'
