@@ -31,7 +31,6 @@ include_recipe 'nginx::default'
 include_recipe 'git'
 include_recipe 'drush'
 
-
 %w(curl htop php5-gmp unzip).each do |pkg|
   package pkg
 end
@@ -44,33 +43,33 @@ php_pear 'xdebug' do
   action :install
 end
 
-template "/etc/php5/conf.d/xdebug.ini" do
-  source "xdebug.ini.erb"
-  owner "root"
-  group "root"
+template '/etc/php5/conf.d/xdebug.ini' do
+  source 'xdebug.ini.erb'
+  owner 'root'
+  group 'root'
   mode 0644
 end
 
 php_pear 'xhprof' do
-  preferred_state "beta"
+  preferred_state 'beta'
   action :install
 end
 
 web_app node['drupal']['project_name'] do
-  template "web_app.conf.erb"
+  template 'web_app.conf.erb'
   listen_port node['drupal']['apache_port']
   server_name node['drupal']['project_name']
   server_aliases [node['drupal']['project_name']]
   docroot node['drupal']['docroot']
-  notifies :restart, "service[apache2]"
+  notifies :restart, 'service[apache2]'
 end
 
 template "#{node['nginx']['dir']}/sites-available/#{node['drupal']['project_name']}" do
-  source "nginx_site.conf.erb"
+  source 'nginx_site.conf.erb'
   mode 0644
-  owner "root"
-  group "root"
-  notifies :reload, "service[nginx]"
+  owner 'root'
+  group 'root'
+  notifies :reload, 'service[nginx]'
 end
 
 nginx_site node['drupal']['project_name']
