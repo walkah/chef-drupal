@@ -6,8 +6,10 @@ provisioner:
   name: chef_zero
 
 platforms:
-  - name: ubuntu-12.04
+  - name: precise64
     driver_config:
+      box: "precise64"
+      box_url: "http://files.vagrantup.com/precise64.box"
       customize:
         memory: 2048
         cpus: 2
