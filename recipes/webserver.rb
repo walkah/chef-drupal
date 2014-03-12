@@ -43,11 +43,16 @@ php_pear 'xdebug' do
   action :install
 end
 
+cmd = Mixlib::ShellOut.new("find /usr/lib/php5 -name 'xdebug.so'")
+cmd.run_command
+cmd.error!
+
 template '/etc/php5/conf.d/xdebug.ini' do
   source 'xdebug.ini.erb'
   owner 'root'
   group 'root'
   mode 0644
+  variables :extension_file => cmd.stdout
 end
 
 php_pear 'xhprof' do
