@@ -6,7 +6,7 @@
     "drush": {
       "locked_version": "0.10.0",
       "git": "https://github.com/msonnabaum/chef-drush.git",
-      "ref": "6f249e914bd611ee6506f005d9c7d518baa77247"
+      "ref": "5f773234016eef9164ce17844724ce2fe08b7073"
     },
     "apache2": {
       "locked_version": "1.8.14"
@@ -69,7 +69,7 @@
       "locked_version": "1.1.12"
     },
     "php": {
-      "locked_version": "1.3.14"
+      "locked_version": "1.4.4"
     },
     "xml": {
       "locked_version": "1.2.0"
