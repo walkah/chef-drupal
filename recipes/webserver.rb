@@ -48,7 +48,6 @@ template '/etc/php5/conf.d/xdebug.ini' do
   owner 'root'
   group 'root'
   mode 0644
-  variables :extension_file => Mixlib::ShellOut.new("find /usr/lib/php5 -name 'xdebug.so'").run_command.stdout
 end
 
 php_pear 'xhprof' do

@@ -1,4 +1,4 @@
-zend_extension=<%= @extension_file %>
+zend_extension=<%=  Mixlib::ShellOut.new("find /usr/lib/php5 -name 'xdebug.so'").run_command.stdout %>
 xdebug.default_enable=1
 xdebug.remote_enable=1
 xdebug.remote_handler=dbgp
