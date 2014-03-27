@@ -1,33 +1,23 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure("2") do |config|
-  config.vm.hostname = "drupal"
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
 
-  config.vm.box = "precise64"
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # Every Vagrant virtual environment requires a box to build off of.
+  config.vm.box = "walkah/drupal-precise64"
 
-  config.vm.network :private_network, ip: "33.33.33.10"
-
-  config.omnibus.chef_version = :latest
-  config.berkshelf.enabled = true
+  config.vm.network "private_network", ip: "33.33.33.10"
 
   config.ssh.forward_agent = true
 
-  config.vm.provision :chef_solo do |chef|
-    chef.json = {
-      :mysql => {
-        :server_root_password => 'root',
-        :server_debian_password => 'root',
-        :server_repl_password => 'root',
-        :allow_remote_root => true,
-        :bind_address => '0.0.0.0'
-      }
-    }
-
-    chef.run_list = [
-      "recipe[apt]",
-      "recipe[drupal::default]"
-    ]
+  config.vm.synced_folder ".", "/vagrant", :type => "nfs"
+  
+  config.vm.provider "virtualbox" do |vb|
+    # Use VBoxManage to customize the VM. For example to change memory:
+    vb.name = "drupal"
+    vb.memory = 2048
+    vb.cpus = 2
   end
 end
