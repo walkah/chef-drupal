@@ -45,5 +45,3 @@ suites:
         default_site_enabled: false
       nginx:
         default_site_enabled: false
-      drupal:
-        docroot: '/vagrant/public'
