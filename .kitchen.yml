@@ -6,6 +6,17 @@ provisioner:
   name: chef_zero
 
 platforms:
+  - name: lucid64
+    driver_config:
+      box: "lucid64"
+      box_url: "http://files.vagrantup.com/lucid64.box"
+      customize:
+        memory: 2048
+        cpus: 2
+      network:
+        - ["private_network", {ip: "33.33.33.10"}]
+    run_list:
+      - recipe[apt]
   - name: precise64
     driver_config:
       box: "precise64"
@@ -17,6 +28,11 @@ platforms:
         - ["private_network", {ip: "33.33.33.10"}]
     run_list:
       - recipe[apt]
+
+suites:
+  - name: default
+    run_list:
+      - recipe[drupal::default]
     attributes:
       mysql:
         server_root_password: 'root'
@@ -31,8 +47,3 @@ platforms:
         default_site_enabled: false
       drupal:
         docroot: '/vagrant/public'
-
-suites:
-  - name: default
-    run_list:
-      - recipe[drupal::default]
