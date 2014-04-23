@@ -1,10 +1,10 @@
-name             'drupal'
-maintainer       'James Walker'
+name 'drupal'
+maintainer 'James Walker'
 maintainer_email 'walkah@walkah.net'
-license          'Apache 2.0'
-description      'Installs/Configures Drupal'
+license 'Apache 2.0'
+description 'Installs/Configures Drupal'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.2.0'
+version '0.2.0'
 
 supports 'debian'
 supports 'ubuntu'
