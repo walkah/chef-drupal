@@ -1,5 +1,8 @@
 rvm:
-  - 2.0.0
+- 2.1.2
 script:
-  - bundle exec foodcritic -f any .
-  - bundle exec rubocop
+- bundle exec foodcritic -f any .
+- bundle exec rubocop
+notifications:
+  slack:
+    secure: IN+6K9QLaiRRo5qM1wU2D2+2IZhOW9vXcOBnt17PDThHk++h/tyEIJkyL/RvyFqzPrWFm+WZpxmYVupRznhyyuBpMQa+kbRNshINXjYcOiJby4kFiPXsfuHhjXx/ZFVAHBH1W/2jUGFi2ZK/HQiBaXwHfxL5WR3DdDjTwuX1oHE=
