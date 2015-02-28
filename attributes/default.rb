@@ -21,3 +21,5 @@ default['drupal']['project_name'] = 'drupal'
 default['drupal']['docroot'] = '/var/www/drupal'
 default['drupal']['apache_port'] = 8080
 default['drupal']['database'] = 'drupal'
+
+default['php']['xdebug']['version'] = '2.2.7'

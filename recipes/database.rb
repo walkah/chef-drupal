@@ -17,14 +17,22 @@
 # limitations under the License.
 #
 
-include_recipe 'mysql::server'
-include_recipe 'database::mysql'
-
 mysql_connection_info = {
-  :host     => 'localhost',
+  :host     => '127.0.0.1',
   :username => 'root',
   :password => node['mysql']['server_root_password']
 }
+
+mysql_service 'default' do
+  port '3306'
+  bind_address '0.0.0.0'
+  initial_root_password node['mysql']['server_root_password']
+  action [:create, :start]
+end
+
+mysql2_chef_gem 'default' do
+  action :install
+end
 
 mysql_database node['drupal']['database'] do
   connection mysql_connection_info

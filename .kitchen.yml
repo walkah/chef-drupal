@@ -6,26 +6,18 @@ provisioner:
   name: chef_zero
 
 platforms:
-  - name: lucid64
+  - name: ubuntu-12.04
     driver_config:
-      box: "lucid64"
-      box_url: "http://files.vagrantup.com/lucid64.box"
       customize:
         memory: 2048
         cpus: 2
-      network:
-        - ["private_network", {ip: "33.33.33.10"}]
     run_list:
       - recipe[apt]
-  - name: precise64
+  - name: ubuntu-10.04
     driver_config:
-      box: "precise64"
-      box_url: "http://files.vagrantup.com/precise64.box"
       customize:
         memory: 2048
         cpus: 2
-      network:
-        - ["private_network", {ip: "33.33.33.10"}]
     run_list:
       - recipe[apt]
 

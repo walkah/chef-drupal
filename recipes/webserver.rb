@@ -40,6 +40,8 @@ php_pear 'uploadprogress' do
 end
 
 php_pear 'xdebug' do
+  zend_extensions ['xdebug.so']
+  version node['php']['xdebug']['version']
   action :install
 end
 
