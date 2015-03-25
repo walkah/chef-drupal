@@ -6,6 +6,13 @@ provisioner:
   name: chef_zero
 
 platforms:
+  - name: ubuntu-14.04
+    driver_config:
+      customize:
+        memory: 2048
+        cpus: 2
+    run_list:
+      - recipe[apt]
   - name: ubuntu-12.04
     driver_config:
       customize:

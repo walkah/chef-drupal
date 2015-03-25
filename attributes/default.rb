@@ -22,4 +22,14 @@ default['drupal']['docroot'] = '/var/www/drupal'
 default['drupal']['apache_port'] = 8080
 default['drupal']['database'] = 'drupal'
 
-default['php']['xdebug']['version'] = '2.2.7'
+case node['platform']
+when 'ubuntu'
+  if node['platform_version'].to_f >= 12.10
+    default['build-essential']['compile_time'] = true
+    default['php']['xdebug']['version'] = '2.3.2'
+    default['php']['ext_conf_dir'] = '/etc/php5/mods-available'
+  else
+    default['php']['xdebug']['version'] = '2.2.7'
+    default['php']['ext_conf_dir']  = '/etc/php5/conf.d'
+  end
+end
